@@ -1,0 +1,111 @@
+<?php
+
+//B2C RESPONSE
+
+$type=$_GET['type'];
+
+if($type=='b2c'){
+	//sendmessage("b2c");
+	//get the response
+	$postdata = file_get_contents("php://input");
+	//echo $postdata;
+	$json1=json_decode($postdata,true);
+	$transactionid=$json1['Result']['TransactionID'];
+	$resultparameters=$json1['Result'][0];
+
+sendmessage($transactionid);
+	
+	
+/*if(isset($postdata)){
+	$response=json_decode($postdata,true);
+	
+	sendmessage($response["Result"]["ResultParameters"]["ResultParameter"][0]);
+	}
+	else{
+		sendmessage("no postdata  ");
+	}
+*/
+}
+else if($type='timeout'){
+sendmessage("timeout");
+}
+
+
+
+
+
+
+
+function sendmessage($message){
+	// Be sure to include the file you've just downloaded
+require_once('AfricasTalkingGateway.php');
+
+// Specify your authentication credentials
+$username="sandbox";
+$apikey="4bf62af822fac19210277653049dfab0650f8a92269e50992b8c575432b089e3";
+
+// Specify the numbers that you want to send to in a comma-separated 
+
+//list
+// Please ensure you include the country code (+254 for Kenya in this case)
+
+
+$recipients = "+254715694798";
+
+// And of course we want our recipients to know what we really do
+ //$message    = "I'm a lumberjack and its ok, I sleep all night and I 
+
+// work all day";
+
+// Create a new instance of our awesome gateway class
+$gateway  = new AfricasTalkingGateway($username,$apikey,"sandbox");
+
+
+//$gateway    = new AfricasTalkingGateway($username, $apikey);
+
+/********************************************************************
+
+*****************
+  NOTE: If connecting to the sandbox:
+
+  1. Use "sandbox" as the username
+  2. Use the apiKey generated from your sandbox application
+     https://account.africastalking.com/apps/sandbox/settings/key
+  3. Add the "sandbox" flag to the constructor
+
+  $gateway  = new AfricasTalkingGateway($username, $apiKey, 
+
+"sandbox");
+*********************************************************************
+
+*****************/
+
+// Any gateway error will be captured by our custom Exception class 
+
+//below, 
+// so wrap the call in a try-catch block
+
+try 
+{ 
+  // Thats it, hit send and we'll take care of the rest. 
+  $results = $gateway->sendMessage($recipients, $message);
+			
+  foreach($results as $result) {
+    // status is either "Success" or "error message"
+    echo " Number: " .$result->number;
+    echo " Status: " .$result->status;
+    echo " StatusCode: " .$result->statusCode;
+    echo " MessageId: " .$result->messageId;
+    echo " Cost: "   .$result->cost."\n";
+  }
+}
+catch ( AfricasTalkingGatewayException $e )
+{
+  echo "Encountered an error while sending: ".$e->getMessage();
+}
+
+// DONE!!! 
+
+
+}
+?>

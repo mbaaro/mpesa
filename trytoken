@@ -1,0 +1,6 @@
+<?php
+$try="HTTP/1.1 200 OK Date: Tue, 19 Jun 2018 06:52:16 GMT Content-Type: application/json;charset=UTF-8 Content-Length: 113 Connection: keep-alive Cache-Control: no-store Server: Apigee Router
+ { "access_token": "sguoGAZNntGKiZh8NSSVXnvK5Pjk", "expires_in": "3599" } 
+
+void parse_str ( string $encoded_string [, array &$result ] )
+?>
