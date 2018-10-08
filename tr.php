@@ -1,5 +1,24 @@
 <?php 
-$json='{
+
+$data=array(
+'ResultType'=>'0',
+ 'ResultType'=>'0',
+ 'ResultCode'=>'0',
+ 'ResultDesc'=>'The service request has been accepted successfully.',
+ 'OriginatorConversationID'=>'19455-424535-1',
+  'ConversationID'=>'AG_20170717_00006be9c8b5cc46abb6',
+  'TransactionID'=>'LGH3197RIB',
+  'ResultParameters'=>array(
+   'ResultParameter'=>[
+array('key'=>'TransactionReceipt'),
+   ]),
+  );
+
+$json1= json_encode(array('Response' => $data ));
+$json2= json_decode($json1);
+var_dump($json2['Response']['ResultParameters']['ResultParameter']);
+
+/*{
     "Result":{
     "ResultType":0,
     "ResultCode":0,
@@ -49,18 +68,11 @@ $json='{
         "Value":"https://internalsandbox.safaricom.co.ke/mpesa/b2cresults/v1/submit"
       }
     }
-  }
-}';
-$json1=json_decode($json,true);
-//var_dump($json1["Result"]["ResultParameters"]["ResultParameter"][0]);
-$json2=$json1["Result"]["ResultParameters"]["ResultParameter"][0];
-//var_dump($json2["Value"]);
- foreach ($json as $json3) {
- // var_dump($json3->Value);
-  var_dump($json3["Result"]);
- }
-  
+  }}*/
 
-
+  /*/*$myfile = fopen("resultfile.php", "w") or die("Unable to open file!");
+$txt =var_dump($json1);
+fwrite($myfile, $txt);
+*/
 
 ?>

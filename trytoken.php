@@ -22,13 +22,14 @@ $url ='https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_crede
             
            // curl_setopt_array( $ch, $curl_options );
             $output = curl_exec( $ch );
+			var_dump($output);
             curl_close($ch);
 var_dump($output);
 $arr = json_decode($output,true);
 
-foreach($arr['items'] as $val)
+/*foreach($arr['items'] as $val)
 {
         echo $val['thumbnailURL'].'<br>';       
-}
+}*/
 
 ?>

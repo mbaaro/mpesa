@@ -1,43 +1,18 @@
 <?php
+//include('b2c_helper.php');
 
-//B2C RESPONSE
+include('b2c_helper.php');
 
-$type=$_GET['type'];
-
-if($type=='b2c'){
-	//sendmessage("b2c");
-	//get the response
-	$postdata = file_get_contents("php://input");
-	//echo $postdata;
-	$json1=json_decode($postdata,true);
-	$transactionid=$json1['Result']['TransactionID'];
-	$resultparameters=$json1['Result'][0];
-
-sendmessage($transactionid);
-	
-	
-/*if(isset($postdata)){
-	$response=json_decode($postdata,true);
-	
-	sendmessage($response["Result"]["ResultParameters"]["ResultParameter"][0]);
-	}
-	else{
-		sendmessage("no postdata  ");
-	}
-*/
-}
-else if($type='timeout'){
-sendmessage("timeout");
-}
+$b2c=file_get_contents('php://input');
+//echo $b2c;
+ $fw=fopen('resultfile.php', 'w');
+ fwrite($fw, $b2c);
 
 
-
-
-
-
+ 
 
 function sendmessage($message){
-	// Be sure to include the file you've just downloaded
+    // Be sure to include the file you've just downloaded
 require_once('AfricasTalkingGateway.php');
 
 // Specify your authentication credentials
@@ -89,7 +64,7 @@ try
 { 
   // Thats it, hit send and we'll take care of the rest. 
   $results = $gateway->sendMessage($recipients, $message);
-			
+            
   foreach($results as $result) {
     // status is either "Success" or "error message"
     echo " Number: " .$result->number;
@@ -107,5 +82,5 @@ catch ( AfricasTalkingGatewayException $e )
 // DONE!!! 
 
 
-}
+}   
 ?>

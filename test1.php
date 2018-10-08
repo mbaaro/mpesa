@@ -27,15 +27,15 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json','Au
 
 $curl_post_data = array(
   //Fill in the request parameters with valid values
-  'InitiatorName' => 'Safaricomapi',
-  'SecurityCredential' => 'VKKYfN74',
-  'CommandID' => 'BusinessPayment',
-  'Amount' => '100',
-  'PartyA' => '600736',
+  'InitiatorName' => 'testapi',
+  'SecurityCredential' => 'ksXfXO3tBxlTIoEWLnvbHRpQ+VA76drgY//YwtTJh/D8P0QHgEwKSqJKHg2WXCn58qvekgD9jLOe9tvMrimid7RVhv0g//x93+/RRu2nVwwafnmXi13f1yuqyyuXClF/w/t7V2A1hgS6PjCx9ZrK+6j4+rwyRPsslq1xHhKGJxcQlar3rHIsJMzTl7tMObwBoq9HEIJ+28td4kOmwpg+WibPCeDh4is1I+9+mJEIjpmgHRU9P943of27l7wXN4rHGJAIjNjdpcEXhssI/ibY0hb97BY/9d9cAqklmWPSbcuV8UO+wMKWophqBGGHqVgSa4CK4vqKspXtkUgurVYkCA==',
+  'CommandID' => 'SalaryPayment',
+  'Amount' => '500',
+  'PartyA' => '600566',
   'PartyB' => '254708374149',
-  'Remarks' => 'test',
-  'QueueTimeOutURL' => 'https://5a3aa8fb.ngrok.io/mpesa/test1.php',
-  'ResultURL' => 'https://5a3aa8fb.ngrok.io/mpesa/test1.php',
+  'Remarks' => 'payment of your august salary',
+  'QueueTimeOutURL' => 'https://f5dd70d6.ngrok.io/mpesa/response.php?type=timeout',
+  'ResultURL' => 'https://f5dd70d6.ngrok.io/mpesa/response.php?type=b2c',
   'Occasion' => ' '
 );
 

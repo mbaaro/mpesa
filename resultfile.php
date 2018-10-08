@@ -1,0 +1,1 @@
+{"Result":{"ResultType":0,"ResultCode":1,"ResultDesc":"The balance is insufficient for the transaction.","OriginatorConversationID":"8525-1673611-1","ConversationID":"AG_20180928_0000617653511b14a01c","TransactionID":"MIS01H6UJC","ReferenceData":{"ReferenceItem":{"Key":"QueueTimeoutURL","Value":"https:\/\/internalsandbox.safaricom.co.ke\/mpesa\/b2cresults\/v1\/submit"}}}}
