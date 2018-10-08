@@ -1,0 +1,1 @@
+The balance is insufficient for the transaction.

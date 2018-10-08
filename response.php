@@ -1,29 +1,24 @@
 <?php
-//include('b2c_helper.php');
+//include 'b2c_helper.php';
 
 
-$b2c ='{"Result":{"ResultType":0,"ResultCode":0,"ResultDesc":"The service request has been accepted successfully.","OriginatorConversationID":"19455-424535-1","ConversationID":"AG_20170717_00006be9c8b5cc46abb6","TransactionID":"LGH3197RIB","ResultParameters":{"ResultParameter":[{"Key":"TransactionReceipt","Value":"LGH3197RIB"},{"Key":"TransactionAmount","Value":8000},{"Key":"B2CWorkingAccountAvailableFunds","Value":150000},{"Key":"B2CUtilityAccountAvailableFunds","Value":133568},{"Key":"TransactionCompletedDateTime","Value":"17.07.2017 10:54:57"},{"Key":"ReceiverPartyPublicName","Value":"254708374149 - John Doe"},{"Key":"B2CChargesPaidAccountAvailableFunds","Value":0},{"Key":"B2CRecipientIsRegisteredCustomer","Value":"Y"}]},"ReferenceData":{"ReferenceItem":{"Key":"QueueTimeoutURL","Value":"https://internalsandbox.safaricom.co.ke/mpesa/b2cresults/v1/submit"}}}}'; 
+//$b2c ='{"Result":{"ResultType":0,"ResultCode":0,"ResultDesc":"The service request has been accepted successfully.","OriginatorConversationID":"19455-424535-1","ConversationID":"AG_20170717_00006be9c8b5cc46abb6","TransactionID":"LGH3197RIB","ResultParameters":{"ResultParameter":[{"Key":"TransactionReceipt","Value":"LGH3197RIB"},{"Key":"TransactionAmount","Value":8000},{"Key":"B2CWorkingAccountAvailableFunds","Value":150000},{"Key":"B2CUtilityAccountAvailableFunds","Value":133568},{"Key":"TransactionCompletedDateTime","Value":"17.07.2017 10:54:57"},{"Key":"ReceiverPartyPublicName","Value":"254708374149 - John Doe"},{"Key":"B2CChargesPaidAccountAvailableFunds","Value":0},{"Key":"B2CRecipientIsRegisteredCustomer","Value":"Y"}]},"ReferenceData":{"ReferenceItem":{"Key":"QueueTimeoutURL","Value":"https://internalsandbox.safaricom.co.ke/mpesa/b2cresults/v1/submit"}}}}'; 
 
-//$b2c=file_get_contents('php://input');
-/*include 'b2c_helper.php' ;
-$response=format_b2c($b2c);
-$fw=fopen('resultfile.php', 'a');
+$b2c=file_get_contents('php://input');
 
-//fwrite($fw, $response->ResultType);
-//fwrite($fw, $response);
-foreach($response as $master1){
-fwrite($fw, $master1);
-	
-fwrite($fw, $master1['ResultDesc']);
-	
-fwrite($fw, $master1->ResultDesc;
-}
-*/
-$result=format_b2c($b2c);
-
-print_r($result->ResultDesc);
+/*$result=format_b2c($b2c);
+$fw=fopen('resultfile.php', 'w');
+fwrite($fw,$result->ResultDesc);
+print_r($result->ResultDesc);*/
 
 //format_b2c($data);
+
+$result=format_b2c($b2c);
+$fw=fopen('resultfile.php', 'a');
+//fwrite($fw,'hfhfhfhf');
+fwrite($fw,$result->ResultDesc);
+
+
 function format_b2c($data){
      $master = array();
      $data = json_decode($data);
@@ -46,25 +41,12 @@ function format_b2c($data){
             $master[$result->ResultParameters->ResultParameter->Key] = $result->ResultParameters->ResultParameter->Value;
         }
     }
-
-
- /*$fw=fopen('resultfile.php','w');
- fwrite($fw, $master->ResultType);
- 
- print_r($master->ResultType);
- foreach($master as $master1){
-	fwrite($fw, $master1->ResultType); 
-	 }
- 
- fwrite($fw, $master1->ResultType);
-     //
-*/
  
 return (object) $master;
 
 
 }
- 
+
 
 function sendmessage($message){
     // Be sure to include the file you've just downloaded
