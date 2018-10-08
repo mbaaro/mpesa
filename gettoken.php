@@ -1,5 +1,5 @@
 <?php 
-///get token
+///get  the access token token
 
                   $consumerkey='UcD02EGzJsIiwWPmOJtyH0BFhLHmnyFF';
                   $consumersecret='v8Uy5ZwbLeUN1lgk';

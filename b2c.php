@@ -17,8 +17,8 @@ $curl_post_data = array(
   'PartyA' => '600566',
   'PartyB' => '254708374149',
   'Remarks' => 'payment of your august salary',
-  'QueueTimeOutURL' => 'https://dccff545.ngrok.io/mpesa/response.php?type=timeout',
-  'ResultURL' => 'https://dccff545.ngrok.io/mpesa/response.php?type=b2c',
+  'QueueTimeOutURL' => 'https://713b66b5.ngrok.io/mpesa/response.php?type=timeout',
+  'ResultURL' => 'https://713b66b5.ngrok.io/mpesa/response.php?type=b2c',
   'Occasion' => ' '
 );
 
@@ -31,6 +31,8 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
 $curl_response = curl_exec($curl);
 //print_r($curl_response);
 echo $curl_response;
+
+
 
 
 ?>
