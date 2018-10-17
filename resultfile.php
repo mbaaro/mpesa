@@ -1,1 +1,0 @@
-This is a b2b request response

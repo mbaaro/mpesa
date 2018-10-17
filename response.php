@@ -13,10 +13,10 @@ fwrite($fw,$result->TransactionID);
 }
 elseif($type=='b2b'){
 
-fwrite($fw,$result->TransactionID."  b2c");	
+fwrite($fw,$result->TransactionID.$result->ResultDesc.$result->InitiatorAccountCurrentBalance);	
 
 }
-else(){
+else{
 
 fwrite($fw,"Please specify the request type");	
 
