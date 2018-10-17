@@ -1,23 +1,26 @@
 <?php
-//include 'b2c_helper.php';
+//decoding the responses from various calls
 
-
-//$b2c ='{"Result":{"ResultType":0,"ResultCode":0,"ResultDesc":"The service request has been accepted successfully.","OriginatorConversationID":"19455-424535-1","ConversationID":"AG_20170717_00006be9c8b5cc46abb6","TransactionID":"LGH3197RIB","ResultParameters":{"ResultParameter":[{"Key":"TransactionReceipt","Value":"LGH3197RIB"},{"Key":"TransactionAmount","Value":8000},{"Key":"B2CWorkingAccountAvailableFunds","Value":150000},{"Key":"B2CUtilityAccountAvailableFunds","Value":133568},{"Key":"TransactionCompletedDateTime","Value":"17.07.2017 10:54:57"},{"Key":"ReceiverPartyPublicName","Value":"254708374149 - John Doe"},{"Key":"B2CChargesPaidAccountAvailableFunds","Value":0},{"Key":"B2CRecipientIsRegisteredCustomer","Value":"Y"}]},"ReferenceData":{"ReferenceItem":{"Key":"QueueTimeoutURL","Value":"https://internalsandbox.safaricom.co.ke/mpesa/b2cresults/v1/submit"}}}}'; 
-
-$b2c=file_get_contents('php://input');
-
-/*$result=format_b2c($b2c);
+$type=$_GET['type'];
+//get the response sent from the request files
+$response=file_get_contents('php://input');
+$result=format_b2c($response);
+//lets open a file to write something onto
 $fw=fopen('resultfile.php', 'w');
-fwrite($fw,$result->ResultDesc);
-print_r($result->ResultDesc);*/
 
-//format_b2c($data);
+if($type=='b2c'){
+fwrite($fw,$result->TransactionID);	
+}
+elseif($type=='b2b'){
 
-$result=format_b2c($b2c);
-$fw=fopen('resultfile.php', 'a');
-//fwrite($fw,'hfhfhfhf');
-fwrite($fw,$result->ResultDesc);
+fwrite($fw,$result->TransactionID."  b2c");	
 
+}
+else(){
+
+fwrite($fw,"Please specify the request type");	
+
+}
 
 function format_b2c($data){
      $master = array();
@@ -48,76 +51,5 @@ return (object) $master;
 }
 
 
-function sendmessage($message){
-    // Be sure to include the file you've just downloaded
-require_once('AfricasTalkingGateway.php');
 
-// Specify your authentication credentials
-$username="sandbox";
-$apikey="4bf62af822fac19210277653049dfab0650f8a92269e50992b8c575432b089e3";
-
-// Specify the numbers that you want to send to in a comma-separated 
-
-//list
-// Please ensure you include the country code (+254 for Kenya in this case)
-
-
-$recipients = "+254715694798";
-
-// And of course we want our recipients to know what we really do
- //$message    = "I'm a lumberjack and its ok, I sleep all night and I 
-
-// work all day";
-
-// Create a new instance of our awesome gateway class
-$gateway  = new AfricasTalkingGateway($username,$apikey,"sandbox");
-
-
-//$gateway    = new AfricasTalkingGateway($username, $apikey);
-
-/********************************************************************
-
-*****************
-  NOTE: If connecting to the sandbox:
-
-  1. Use "sandbox" as the username
-  2. Use the apiKey generated from your sandbox application
-     https://account.africastalking.com/apps/sandbox/settings/key
-  3. Add the "sandbox" flag to the constructor
-
-  $gateway  = new AfricasTalkingGateway($username, $apiKey, 
-
-"sandbox");
-*********************************************************************
-
-*****************/
-
-// Any gateway error will be captured by our custom Exception class 
-
-//below, 
-// so wrap the call in a try-catch block
-
-try 
-{ 
-  // Thats it, hit send and we'll take care of the rest. 
-  $results = $gateway->sendMessage($recipients, $message);
-            
-  foreach($results as $result) {
-    // status is either "Success" or "error message"
-    echo " Number: " .$result->number;
-    echo " Status: " .$result->status;
-    echo " StatusCode: " .$result->statusCode;
-    echo " MessageId: " .$result->messageId;
-    echo " Cost: "   .$result->cost."\n";
-  }
-}
-catch ( AfricasTalkingGatewayException $e )
-{
-  echo "Encountered an error while sending: ".$e->getMessage();
-}
-
-// DONE!!! 
-
-
-}   
 ?>

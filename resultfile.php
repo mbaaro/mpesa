@@ -1,1 +1,1 @@
-The balance is insufficient for the transaction.
+This is a b2b request response
