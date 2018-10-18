@@ -1,6 +1,7 @@
 <?php
 //lets pull the access token_get_all\
 include_once('gettoken.php');
+include_once('onlinepayment_helper.php');
 
 $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
 
@@ -22,11 +23,11 @@ $curl_post_data = array(
   'Password' => $password,
   'Timestamp' => $timestamp,
   'TransactionType' => 'CustomerPayBillOnline',
-  'Amount' => '100',
+  'Amount' => '1',
   'PartyA' => '254715694798',
   'PartyB' => $shortcode,
   'PhoneNumber' => '254715694798',
-  'CallBackURL' => 'https://6df81856.ngrok.io/mpesa/response.php?type=lipaonline',
+  'CallBackURL' => 'https://385b81d0.ngrok.io/mpesa/onlinepayment_helper.php?',
   'AccountReference' => '123459', //account number of receiver
   'TransactionDesc' => 'Benson Rwara Mbaaro Lunch'
 );
@@ -39,8 +40,9 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
 
 $curl_response = curl_exec($curl);
 print_r($curl_response);
-
-echo $curl_response;
+$x=json_decode($curl_response);
+//$fw=fopen('resultfile.php','w');
+//fwrite($fw,$x->CheckoutRequestID);
 
 
 

@@ -1,5 +1,6 @@
 <?php
-	
+	/*https://peternjeru.co.ke/safdaraja/ui/index.php#b2b_tutorial
+*/
   
 include_once('gettoken.php');
   
