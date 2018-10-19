@@ -5,22 +5,27 @@
           },{"Name":"PhoneNumber","Value":254721566839}]}}}}';
 		*/
 $response=file_get_contents('php://input');
-$data1=json_decode($response);
 if(isset($response)){
-	//lets make the 
-	$fw=fopen('resultfile.php', 'w');
-	fwrite($fw,'nothing was passed');
-	}else{
-$fw=fopen('resultfile.php', 'w');
-	fwrite($fw,'nothing was passed');	
+//if a response with values came
+$resultcode=format_data($response)->ResultCode;
+if($resultcode==0){
+//the transaction is successful
+	$fw=fopen('resultfile.php','w');
+fwrite($fw, format_data($response)->CheckoutRequestID."   ".format_data($response)->MerchantRequestID."   ".format_data($response)->PhoneNumber);
+
+}else{
+//the transaction failed
+	$fw=fopen('resultfile.php','w');
+fwrite($fw, format_data($response)->CheckoutRequestID."   ".format_data($response)->ResultDesc);
+
 }
 
+}
+else{
+	$fw=fopen('resultfile.php','w');
+fwrite($fw, "nothing was passed");
 
-
-
-
-
-
+}
 
 
 

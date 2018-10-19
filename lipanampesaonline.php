@@ -27,7 +27,7 @@ $curl_post_data = array(
   'PartyA' => '254715694798',
   'PartyB' => $shortcode,
   'PhoneNumber' => '254715694798',
-  'CallBackURL' => 'https://385b81d0.ngrok.io/mpesa/onlinepayment_helper.php?',
+  'CallBackURL' => 'https://c24d03d6.ngrok.io/mpesa/onlinepayment_helper.php?',
   'AccountReference' => '123459', //account number of receiver
   'TransactionDesc' => 'Benson Rwara Mbaaro Lunch'
 );
@@ -39,8 +39,8 @@ curl_setopt($curl, CURLOPT_POST, true);
 curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
 
 $curl_response = curl_exec($curl);
-print_r($curl_response);
-$x=json_decode($curl_response);
+//print_r($curl_response);
+//$x=json_decode($curl_response);
 //$fw=fopen('resultfile.php','w');
 //fwrite($fw,$x->CheckoutRequestID);
 
